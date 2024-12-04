@@ -1,0 +1,13 @@
+FROM openjdk:23-jdk-slim
+
+WORKDIR /app
+
+COPY ../src ./src
+COPY ../settings.gradle ./settings.gradle
+COPY ../build.gradle ./build.gradle
+COPY ../gradle ./gradle
+COPY ../gradlew ./gradlew
+
+EXPOSE 8080
+
+CMD ["./gradlew", ":bootRun"]
