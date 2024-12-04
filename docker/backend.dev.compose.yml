@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: 
+      context: ../backend
+      dockerfile: ./docker/Dockerfile.dev
+    image: unrealducks-backend-dev
+    container_name: unrealducks-backend-dev
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../backend/src:/app/src
+      - ../backend/build:/app/build
+      - ../backend/settings.gradle:/app/settings.gradle
+      - ../backend/build.gradle:/app/build.gradle
+    ports:
+      - "8080:8080"
+    restart: always
