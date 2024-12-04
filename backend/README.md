@@ -1,1 +1,1 @@
-# Unreal Ducks - Backend
+# UnrealDucks Backend
