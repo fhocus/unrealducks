@@ -1,0 +1,18 @@
+services:
+  sonar-sonar-scanner:
+    image: sonarsource/sonar-scanner-cli:11.1
+    container_name: unrealducks-sonar-sonar-scanner
+    environment:
+      SONAR_HOST_URL: "http://sonar-sonarqube:9000"
+      SONAR_TOKEN: ${SONAR_TOKEN}
+    working_dir: /usr/src
+    volumes:
+      - ../backend/src:/usr/src
+      - ../backend/build/classes:/usr/src/classes
+    networks:
+      - unrealducks-sonar-network
+    entrypoint: ["/bin/sh", "-c", "sonar-scanner -Dsonar.projectKey=unrealducks-backend -Dsonar.sources=. -Dsonar.java.binaries=/usr/src/classes -Dsonar.login=${SONAR_TOKEN}"]
+
+networks:
+  unrealducks-sonar-network:
+    driver: bridge
