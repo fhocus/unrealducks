@@ -1,0 +1,15 @@
+services:
+  ngrok:
+    image: ngrok/ngrok:alpine
+    container_name: unrealducks-postgres-deploy
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    command: tcp postgres:5432
+    networks:
+      - unrealducks-network
+    ports:
+      - 4040:4040
+
+networks:
+  unrealducks-network:
+    driver: bridge
