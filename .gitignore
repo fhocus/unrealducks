@@ -1,4 +1,5 @@
 .env*
-database
+postgres
 jenkins
 sonarqube
+database
