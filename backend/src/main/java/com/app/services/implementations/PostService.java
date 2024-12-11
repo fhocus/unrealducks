@@ -76,15 +76,17 @@ public class PostService implements IPostService{
   //buscador
   @Override
   public boolean index() {
+    Boolean encontrado;
     try {
       SearchSession searchSession = Search.session(entityManager);
       searchSession.massIndexer()
                 .startAndWait();
-      return true;
+      encontrado = true;
     } catch (InterruptedException ie) {
       Thread.currentThread().interrupt();
-      return false;
+      encontrado = false;
     }
+    return encontrado;
   }
 
   @Override
