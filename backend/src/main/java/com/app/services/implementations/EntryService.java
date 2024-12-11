@@ -12,36 +12,42 @@ import com.app.repositories.EntryRepositoryImp;
 import com.app.services.interfaces.IEntryService;
 
 @Service
-public class EntryService implements IEntryService{
+public class EntryService implements IEntryService {
 
   private EntryRepositoryImp entryRepository;
-  public EntryService (EntryRepositoryImp entryRepository) {
+
+  public EntryService(EntryRepositoryImp entryRepository) {
     this.entryRepository = entryRepository;
   }
 
   @Override
   @Transactional
-  public Entry createEntry(ForoUser user,String content){
-    try{
+  public Entry createEntry(ForoUser user, String content) {
+    try {
       Entry entryCreated = new Entry();
       entryCreated.setUser(user);
       entryCreated.setContent(content);
 
       return entryRepository.save(entryCreated);
-    }catch(Exception e){
+    } catch (Exception e) {
       throw new CreationException("No se pudo crear el entry");
     }
   }
 
   @Override
   @Transactional
-  public void addCommentToEntry(Long idEntry){
-    if(!entryRepository.existsById(idEntry)){
+  public void addCommentToEntry(Long idEntry) {
+    if (!entryRepository.existsById(idEntry)) {
       throw new CreationException("No se encontro el entry");
     }
     Optional<Entry> entryO = entryRepository.findById(idEntry);
+
+    if (!entryO.isPresent()) {
+      throw new CreationException("No se encontro el entry");
+    }
+
     Entry entry = entryO.get();
-    entry.setComments(entry.getComments()+1);
+    entry.setComments(entry.getComments() + 1);
     entryRepository.save(entry);
   }
 
