@@ -5,13 +5,15 @@ services:
     environment:
       SONAR_HOST_URL: "http://sonar-sonarqube:9000"
       SONAR_TOKEN: ${SONAR_TOKEN}
-    working_dir: /usr/src
+    working_dir: /tmp/backend
     volumes:
-      - ../backend/src:/usr/src
-      - ../backend/build/classes:/usr/src/classes
+      - ../backend/src:/tmp/backend/src
+      - ../backend/build/classes:/tmp/backend/build/classes
+      - ../backend/sonar-project.properties:/tmp/backend/sonar-project.properties
+      - ../backend/.scannerwork:/tmp/backend/.scannerwork
     networks:
       - unrealducks-sonar-network
-    entrypoint: ["/bin/sh", "-c", "sonar-scanner -Dsonar.projectKey=unrealducks-backend -Dsonar.sources=. -Dsonar.java.binaries=/usr/src/classes -Dsonar.login=${SONAR_TOKEN}"]
+    entrypoint: ["/bin/sh", "-c", "sonar-scanner -Dsonar.login=${SONAR_TOKEN} -X"]
 
 networks:
   unrealducks-sonar-network:
