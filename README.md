@@ -70,6 +70,139 @@ Scripts para automatizar tareas, tales como:
 1. Clonar el repositorio:
    ```bash
    git clone https://github.com/fhocus/unrealducks.git
+   ```
+
+## Muestra del proyecto
+Vistas de la aplicación:
+![f1](https://github.com/user-attachments/assets/e39a7aab-c4e6-49b7-a748-4a037d30c8d2)
+![f2](https://github.com/user-attachments/assets/15227f72-1e07-45dd-96e9-2fe2ab167976)
+![f3](https://github.com/user-attachments/assets/d9b8bf79-2a86-42c1-9f93-003c96a2236f)
+
+## Pipeline
+Pipeline desarrollado en jenkins:
+![pipeline](https://github.com/user-attachments/assets/b51d27d4-d109-4d6d-b11c-d2a9c3382d8f)
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        REPO_URL = 'https://github.com/fhocus/unrealducks'
+        BRANCH = 'main'
+    }
+
+    stages {
+        stage('Clonar Repositorio') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM',
+                              branches: [[name: env.BRANCH]],
+                              userRemoteConfigs: [[url: env.REPO_URL]]])
+                }
+            }
+        }
+        stage('Ir a Carpeta Backend') {
+            steps {
+                script {
+                    dir('backend') {
+                        echo "Directorio actual: ${pwd()}"
+                        sh 'chmod +x ./gradlew'
+                        echo "Dando permisos de ejecución a ./gradlew"
+                    }
+                }
+            }
+        }
+        stage('Construir con Gradle') {
+            steps {
+                script {
+                    dir('backend') {
+                        sh './gradlew build'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'El Pipeline se completó exitosamente.'
+        }
+        failure {
+            echo 'El Pipeline falló.'
+        }
+    }
+}
+```
+![pipeline2](https://github.com/user-attachments/assets/d120f9d7-8a99-43bb-979a-26e6d705572c)
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        REPO_URL = 'https://github.com/fhocus/unrealducks'
+        BRANCH = 'main'
+    }
+
+    stages {
+        stage('Clonar Repositorio') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM',
+                              branches: [[name: env.BRANCH]],
+                              userRemoteConfigs: [[url: env.REPO_URL]]])
+                }
+            }
+        }
+
+        stage('Construir con Gradle') {
+            steps {
+                script {
+                    dir('backend') {
+                        sh 'chmod +x ./gradlew'
+                        sh './gradlew build'
+                    }
+                }
+            }
+        }
+
+        stage('Correr Pruebas') {
+            environment {
+                DATABASE_HOST = 'postgres'
+                DATABASE_PORT = '5432'
+                DATABASE_DB = 'unrealducks'
+                DATABASE_USER = 'unrealduck'
+                DATABASE_PASS = 'unrealduckPassword'
+            }
+            steps {
+                script {
+                    dir('backend') {
+                        // Asegúrate de que el archivo gradlew sea ejecutable
+                        sh 'chmod +x ./gradlew'
+                        sh './gradlew test'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completado exitosamente.'
+        }
+        failure {
+            echo 'Pipeline falló. Revisa los logs para más detalles.'
+        }
+    }
+}
+```
+## Arquitectura del proyecto
+[arq-1.pdf](https://github.com/user-attachments/files/18262135/arq-1.pdf)
+
+## Pruebas de seguridad
+- **OWASP ZAP**: Se realizó un escaneo de seguridad con OWASP ZAP, obteniendo los siguientes resultados:
+![ZAPTest](https://github.com/user-attachments/assets/39a7f508-1e86-4eaf-a773-87a76289cf38)
+
 ## Funcionalidades
 
 ### Register
