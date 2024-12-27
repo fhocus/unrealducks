@@ -73,12 +73,8 @@ Scripts para automatizar tareas, tales como:
    ```
 
 ## Muestra del proyecto
-Vistas de la aplicación:
-![f1](https://github.com/user-attachments/assets/e39a7aab-c4e6-49b7-a748-4a037d30c8d2)
-![f2](https://github.com/user-attachments/assets/15227f72-1e07-45dd-96e9-2fe2ab167976)
-![f3](https://github.com/user-attachments/assets/d9b8bf79-2a86-42c1-9f93-003c96a2236f)
 
-## Pipeline
+### Pipeline
 Pipeline desarrollado en jenkins:
 ![pipeline](https://github.com/user-attachments/assets/b51d27d4-d109-4d6d-b11c-d2a9c3382d8f)
 
@@ -196,10 +192,10 @@ pipeline {
     }
 }
 ```
-## Arquitectura del proyecto
+### Arquitectura del proyecto
 [arq-1.pdf](https://github.com/user-attachments/files/18262135/arq-1.pdf)
 
-## Pruebas de seguridad
+### Pruebas de seguridad
 - **OWASP ZAP**: Se realizó un escaneo de seguridad con OWASP ZAP, obteniendo los siguientes resultados:
 ![ZAPTest](https://github.com/user-attachments/assets/39a7f508-1e86-4eaf-a773-87a76289cf38)
 
