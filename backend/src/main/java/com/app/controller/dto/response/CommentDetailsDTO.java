@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SuppressWarnings("unused")
 public class CommentDetailsDTO {
   private Long id;
   private String autorUsername;
