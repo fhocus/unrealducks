@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@SuppressWarnings("unused")
 public class PostDetailsDTO {
   private Long id;
   private Long idEntry;
@@ -22,6 +23,5 @@ public class PostDetailsDTO {
   private LocalDateTime createdAt;
 
   private String username;
-  
 
 }

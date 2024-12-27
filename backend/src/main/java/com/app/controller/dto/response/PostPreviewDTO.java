@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@SuppressWarnings("unused")
 public class PostPreviewDTO {
   private Long id;
   private String title;
