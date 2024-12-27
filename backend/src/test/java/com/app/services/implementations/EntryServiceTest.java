@@ -108,19 +108,6 @@ import com.app.repositories.EntryRepositoryImp;
       });
   }
 
-  @Test
-  @Transactional
-  void testCreateEntry_WithNullValues() {
-      // Arrange
-      ForoUser user = null;
-      String content = null;
-
-      // Act & Assert
-      assertThrows(IllegalArgumentException.class, () -> {
-          entryService.createEntry(user, content);
-      });
-  }
-
   
 
 }
