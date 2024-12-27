@@ -70,11 +70,28 @@ Scripts para automatizar tareas, tales como:
 1. Clonar el repositorio:
    ```bash
    git clone https://github.com/fhocus/unrealducks.git
-#Funcionalidades
-Register
+## Funcionalidades
+
+### Register
+
 ![image](https://github.com/user-attachments/assets/ad64e07d-08ba-48ed-9c63-a2373f1a7cac)
-Login
+
+---
+
+### Login
+
 ![image](https://github.com/user-attachments/assets/e4a25060-4fc3-41b6-9fb5-caf1274693be)
-Home
+
+---
+
+### Home
+
 ![image](https://github.com/user-attachments/assets/10ac0246-79b9-4a3d-866b-b2f225b7ddc5)
+
+---
+
+### Posts
+
+![image](https://github.com/user-attachments/assets/edf04f70-329c-4725-bf74-dde9beba7134)
+
 
