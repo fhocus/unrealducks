@@ -1,6 +1,8 @@
 services:
   jenkins:
-    image: jenkins/jenkins:alpine-jdk21
+    build:
+      context: .
+      dockerfile: jenkins.Dockerfile
     container_name: unrealducks-jenkins
     privileged: true
     user: root
@@ -10,6 +12,8 @@ services:
     volumes:
       - ../jenkins:/var/jenkins_home
     restart: always
+    networks:
+      - unrealducks-network
 
 networks:
   unrealducks-network:

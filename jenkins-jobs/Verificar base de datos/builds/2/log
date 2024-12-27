@@ -1,0 +1,8 @@
+Started by user [8mha:////4JiDaiN3lO1RWdhbziYzrfr3eN4AajAVhLlYGM/t+7WmAAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyhEgYe/dLi1CL9tIz85NJiANZW1NbBAAAA[0mFabricio Huaquisto
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Verificar base de datos
+[Verificar base de datos] $ /bin/bash /tmp/jenkins14990740452693852345.sh
+psql: error: could not translate host name "unrealducks-postgres" to address: Name does not resolve
+No se pudo conectar a la base de datos.
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
