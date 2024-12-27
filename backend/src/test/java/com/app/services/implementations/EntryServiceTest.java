@@ -1,5 +1,4 @@
 package com.app.services.implementations;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -90,38 +89,38 @@ import com.app.repositories.EntryRepositoryImp;
     //Act and Assert
     CreationException thrown = assertThrows(
       CreationException.class, 
-      () -> entryService.addCommentToEntry(idEntry), "Se esperaba una excepción CreationException cuando el Entry no existe");
+      () -> entryService.addCommentToEntry(idEntry),"nose we");
     
     assertTrue(thrown.getMessage().contains("No se encontro el entry"));
     verify(entryRepository, never()).save(any(Entry.class));
   }
+  @Test
+  @Transactional
+  void testAddCommentToEntry_OptionalEmpty() {
+      Long idEntry = 1L;
 
-    @Test
-    @Transactional
-    void testAddCommentToEntry_OptionalEmpty() {
-        // Arrange
-        Long idEntry = 1L;
+      when(entryRepository.existsById(idEntry)).thenReturn(true);
+      when(entryRepository.findById(idEntry)).thenReturn(Optional.empty());
 
-        when(entryRepository.existsById(idEntry)).thenReturn(true);
-        when(entryRepository.findById(idEntry)).thenReturn(Optional.empty());
+      // Act & Assert
+      assertThrows(CreationException.class, () -> {
+          entryService.addCommentToEntry(idEntry);
+      });
+  }
 
-        // Act & Assert
-        assertThrows(NoSuchElementException.class, () -> {
-            entryService.addCommentToEntry(idEntry);
-        });
-    }
+  @Test
+  @Transactional
+  void testCreateEntry_WithNullValues() {
+      // Arrange
+      ForoUser user = null;
+      String content = null;
 
-    @Test
-    @Transactional
-    void testCreateEntry_WithNullValues() {
-        // Arrange
-        ForoUser user = null;
-        String content = null;
+      // Act & Assert
+      assertThrows(IllegalArgumentException.class, () -> {
+          entryService.createEntry(user, content);
+      });
+  }
 
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            entryService.createEntry(user, content);
-        });
-    }
+  
 
 }
