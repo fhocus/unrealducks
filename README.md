@@ -1,5 +1,11 @@
 # Proyecto: Pipeline CI/CD para Aplicación Web Unrealducks
-
+## Grupo de desarrolladores
+- Erik Manuel Ramos Quispe
+- Fabricio Huaquisto Quispe
+- Kenny David Borja Valencia
+- Jose Carlos Paredes Malaga
+- Sergio Ahmed Castillo Sancho
+- Alonso Ernesto Jose Chullunquia Rosas
 ## Descripción del Proyecto
 
 Este proyecto implementa un pipeline de CI/CD para una aplicación web utilizando las siguientes tecnologías y herramientas:
