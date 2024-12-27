@@ -1,0 +1,43 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H/5 * * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+DB_HOST=&quot;unrealducks-postgres&quot;
+DB_PORT=&quot;5432&quot;
+DB_NAME=&quot;unrealducks&quot;
+DB_USER=&quot;unrealduck&quot;
+DB_PASSWORD=&quot;unrealduckPassword&quot;
+
+export PGPASSWORD=$DB_PASSWORD
+
+if psql -h &quot;$DB_HOST&quot; -p &quot;$DB_PORT&quot; -U &quot;$DB_USER&quot; -d &quot;$DB_NAME&quot; -c &apos;\q&apos;; then
+    echo &quot;La base de datos está en línea.&quot;
+    exit 0
+else
+    echo &quot;No se pudo conectar a la base de datos.&quot;
+    exit 1
+fi
+</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

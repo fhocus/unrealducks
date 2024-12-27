@@ -1,0 +1,80 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1472.ve4d5eca_143c4">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2218.v56d0cda_37c72"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2218.v56d0cda_37c72">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@4002.v80ca_d0f47d7f">
+    <script>pipeline {
+    agent any
+
+    environment {
+        REPO_URL = &apos;https://github.com/fhocus/unrealducks&apos;
+        BRANCH = &apos;main&apos;
+    }
+
+    stages {
+        stage(&apos;Clonar Repositorio&apos;) {
+            steps {
+                script {
+                    checkout([$class: &apos;GitSCM&apos;,
+                              branches: [[name: env.BRANCH]],
+                              userRemoteConfigs: [[url: env.REPO_URL]]])
+                }
+            }
+        }
+
+        stage(&apos;Construir con Gradle&apos;) {
+            steps {
+                script {
+                    dir(&apos;backend&apos;) {
+                        sh &apos;chmod +x ./gradlew&apos;
+                        sh &apos;./gradlew build&apos;
+                    }
+                }
+            }
+        }
+
+        stage(&apos;Correr Pruebas&apos;) {
+            environment {
+                DATABASE_HOST = &apos;postgres&apos;
+                DATABASE_PORT = &apos;5432&apos;
+                DATABASE_DB = &apos;unrealducks&apos;
+                DATABASE_USER = &apos;unrealduck&apos;
+                DATABASE_PASS = &apos;unrealduckPassword&apos;
+            }
+            steps {
+                script {
+                    dir(&apos;backend&apos;) {
+                        // Asegúrate de que el archivo gradlew sea ejecutable
+                        sh &apos;chmod +x ./gradlew&apos;
+                        sh &apos;./gradlew test&apos;
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo &apos;Pipeline completado exitosamente.&apos;
+        }
+        failure {
+            echo &apos;Pipeline falló. Revisa los logs para más detalles.&apos;
+        }
+    }
+}
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
