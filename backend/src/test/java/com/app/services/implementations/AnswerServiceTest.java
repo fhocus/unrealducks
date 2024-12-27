@@ -1,5 +1,4 @@
-
-package com.unrealducks.backend.src.main.java.com.app.services.implementations;
+package com.app.services.implementations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
