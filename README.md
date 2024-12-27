@@ -229,4 +229,7 @@ pipeline {
 
 ![image](https://github.com/user-attachments/assets/edf04f70-329c-4725-bf74-dde9beba7134)
 
+---
 
+### Verificacion de los test
+![image](https://github.com/user-attachments/assets/c97c20d2-dce5-44d5-bf1e-0cac671f772e)
