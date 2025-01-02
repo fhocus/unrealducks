@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Load Test Plan" enabled="true">
+    <hashTree>
+        <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+            <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+            <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+                <boolProp name="LoopController.continue_forever">false</boolProp>
+                <intProp name="LoopController.loops">10</intProp>
+            </elementProp>
+            <intProp name="ThreadGroup.num_threads">100</intProp>
+            <intProp name="ThreadGroup.ramp_time">10</intProp>
+            <longProp name="ThreadGroup.start_time">1671190314000</longProp>
+            <longProp name="ThreadGroup.end_time">1671190314000</longProp>
+            <boolProp name="ThreadGroup.scheduler">false</boolProp>
+            <stringProp name="ThreadGroup.duration"></stringProp>
+            <stringProp name="ThreadGroup.delay"></stringProp>
+        </ThreadGroup>
+        <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /user/helloworld" enabled="true">
+                <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                <stringProp name="HTTPSampler.port">8080</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.path">/user/helloworld</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <stringProp name="HTTPSampler.follow_redirects">true</stringProp>
+                <stringProp name="HTTPSampler.auto_redirects">false</stringProp>
+                <stringProp name="HTTPSampler.embedded_url_re">false</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout">2000</stringProp>
+                <stringProp name="HTTPSampler.response_timeout">2000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree/>
+        </hashTree>
+        <hashTree>
+            <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Result Collector" enabled="true">
+                <stringProp name="filename">build/jmeter-results/result.jtl</stringProp>
+            </ResultCollector>
+            <hashTree/>
+        </hashTree>
+    </hashTree>
+</TestPlan>
